@@ -64,8 +64,8 @@ while True:
         print('We got a message: ' + message)
 
         display.scroll(message)
-        print(str(pronounceDictionary[message]))
-        #speech.pronounce(pronounceDictionary[message])
+        # print(str(pronounceDictionary[message]))
+        # speech.pronounce(pronounceDictionary[message])
         speech.say(message)
         display.show(message)
 
