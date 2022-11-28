@@ -8,6 +8,7 @@ set_volume(20)
 
 alphabet = ["A", "B", "C", "D", "F", "H", "K", "M", "N", "O", "P", "R",]
 alphIndex = 0
+message = "X"
 
 pronounceDictionary = {
     "A": "AE4AE5Y8",
@@ -21,7 +22,8 @@ pronounceDictionary = {
     "N": "EH8EH5N5N8",
     "O": "OH8OH7OH6OH8",
     "P": "P8P7IY8IY6IY4IY5IY7",
-    "R": "AH4R5R7R8"
+    "R": "AH4R5R7R8",
+    "X": "START"
 }
 
 display.show(alphabet[alphIndex])
@@ -43,7 +45,7 @@ while True:
         display.show(alphabet[alphIndex])
         sleep(125)
 
-    if button_a.is_pressed and button_b.is_pressed() == 1:
+    if button_a.is_pressed() == 1 and button_b.is_pressed() == 1:
         print('sending ' + alphabet[alphIndex] + '...')
         radio.send(alphabet[alphIndex])
         sleep(125)
@@ -62,7 +64,9 @@ while True:
         print('We got a message: ' + message)
 
         display.scroll(message)
-        speech.pronounce(pronounceDictionary[message])
+        print(str(pronounceDictionary[message]))
+        #speech.pronounce(pronounceDictionary[message])
+        speech.say(message)
         display.show(message)
 
     sleep(125)
