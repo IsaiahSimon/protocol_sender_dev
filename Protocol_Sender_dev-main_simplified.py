@@ -4,7 +4,9 @@ import speech
 
 radio.on()
 radio.config(group=55)
-set_volume(20)
+radio.send("start")
+set_volume(255)
+speaker.on()
 
 alphabet = ["A", "B", "C", "D", "F", "H", "K", "M", "N", "O", "P", "R",]
 alphIndex = 0
@@ -29,7 +31,10 @@ pronounceDictionary = {
 display.show(alphabet[alphIndex])
 
 while True:
-    if button_a.is_pressed() == 1:
+    # Change pins to capacitive mode if needed
+    # pin1.set_touch_mode(pin1.CAPACITIVE)
+
+    if button_a.is_pressed() == 1 or pin0.is_touched():
         alphIndex = alphIndex - 1
         if alphIndex < 0:
             alphIndex = len(alphabet)-1;
@@ -37,7 +42,7 @@ while True:
         display.show(alphabet[alphIndex])
         sleep(125)
 
-    if button_b.is_pressed() == 1:
+    if button_b.is_pressed() == 1 or pin1.is_touched():
         alphIndex = alphIndex + 1
         if alphIndex > len(alphabet)-1:
             alphIndex = 0;
@@ -45,7 +50,9 @@ while True:
         display.show(alphabet[alphIndex])
         sleep(125)
 
-    if button_a.is_pressed() == 1 and button_b.is_pressed() == 1:
+    if button_a.is_pressed() == 1 and button_b.is_pressed() == 1 or \
+       pin2.is_touched():
+
         print('sending ' + alphabet[alphIndex] + '...')
         radio.send(alphabet[alphIndex])
         sleep(125)
